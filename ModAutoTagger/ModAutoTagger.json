@@ -1,0 +1,13 @@
+{
+  "Author": "Anya Hichu",
+  "Name": "ModAutoTagger",
+  "Punchline": "Ain't nobody got time for bulk tagging",
+  "Description": "Add bulk tags dynamically to penumbra mods based on conditions",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "penumbra",
+    "mod",
+    "tag",
+    "auto"
+  ]
+}
