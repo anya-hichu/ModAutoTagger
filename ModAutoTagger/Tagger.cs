@@ -37,6 +37,7 @@ public class Tagger
         var modDataConfigPath = ModDataConfigPathTemplate.Format(mod.dir);
         var modDataConfig = DeserializeJsonFile(modDataConfigPath);
         modDataConfig["LocalTags"] = JArray.FromObject(tags);
+        PluginLog.Verbose($"Rewrite '{mod.dir}' mod data file with overriden tags: {modDataConfig}");
         SerializeJsonFile(modDataConfigPath, modDataConfig);
     }
 
@@ -59,6 +60,7 @@ public class Tagger
         {
             modDataConfig["LocalTags"] = JArray.FromObject(localTags.Union(tags));
         }
+        PluginLog.Verbose($"Rewrite '{mod.dir}' mod data file with appended tags: {modDataConfig}");
         SerializeJsonFile(modDataConfigPath, modDataConfig);
     }
 

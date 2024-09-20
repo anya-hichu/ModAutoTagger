@@ -5,6 +5,7 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
 using ModAutoTagger.Windows;
 using ModAutoTagger.Ipcs;
+using Dalamud.Interface;
 
 namespace ModAutoTagger;
 
@@ -39,8 +40,15 @@ public sealed class Plugin : IDalamudPlugin
         Resolver = new(Config, QuackEmotesIpc, QuackPenumbraIpc, PluginLog);
         Tagger = new(PluginInterface, PluginLog);
 
-        ConfigWindow = new ConfigWindow(Config);
-        MainWindow = new MainWindow(Resolver, Tagger);
+        ConfigWindow = new ConfigWindow(Config)
+        {
+            TitleBarButtons = [BuildTitleBarButton(FontAwesomeIcon.ListAlt, ToggleMainUI)]
+        };
+
+        MainWindow = new MainWindow(Resolver, Tagger, CommandManager)
+        {
+            TitleBarButtons = [BuildTitleBarButton(FontAwesomeIcon.Cog, ToggleConfigUI)]
+        };
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
@@ -82,4 +90,12 @@ public sealed class Plugin : IDalamudPlugin
     private void DrawUI() => WindowSystem.Draw();
     public void ToggleConfigUI() => ConfigWindow.Toggle();
     public void ToggleMainUI() => MainWindow.Toggle();
+
+    private static Window.TitleBarButton BuildTitleBarButton(FontAwesomeIcon icon, System.Action callback)
+    {
+        Window.TitleBarButton button = new();
+        button.Icon = icon;
+        button.Click = (_) => callback();
+        return button;
+    }
 }
