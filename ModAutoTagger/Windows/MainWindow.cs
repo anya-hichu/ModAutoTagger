@@ -1,14 +1,13 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
-using ImGuiNET;
 using ModAutoTagger.Ipcs;
-using ModAutoTagger.Utils;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Threading.Tasks;
 
 namespace ModAutoTagger.Windows;
 
@@ -93,7 +92,7 @@ public class MainWindow : Window
                     ImGui.TableSetupColumn($"Actions##actions", ImGuiTableColumnFlags.None, 0.3f);
                     ImGui.TableHeadersRow();
 
-                    var clipper = ImGuiHelper.NewListClipper();
+                    var clipper = ImGui.ImGuiListClipper();
 
                     var filteredTagsByMod = tagsByMod.Where(FilterTagsByMod).OrderBy(e => e.Key.name).ToList();
                     clipper.Begin(filteredTagsByMod.Count, 21);
