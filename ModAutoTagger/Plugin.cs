@@ -91,9 +91,9 @@ public sealed class Plugin : IDalamudPlugin
     public void ToggleConfigUI() => ConfigWindow.Toggle();
     public void ToggleMainUI() => MainWindow.Toggle();
 
-    private static Window.TitleBarButton BuildTitleBarButton(FontAwesomeIcon icon, System.Action callback)
+    private static TitleBarButton BuildTitleBarButton(FontAwesomeIcon icon, System.Action callback)
     {
-        Window.TitleBarButton button = new();
+        TitleBarButton button = new();
         button.Icon = icon;
         button.Click = (_) => callback();
         return button;
